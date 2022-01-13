@@ -16,14 +16,15 @@ RSpec.feature "ProductDetails", type: :feature, js: true do
     end
   end
 
-  scenario "They see product details page" do
+  scenario "They see an updated value of 1 in My Cart" do
     visit root_path
     # VERIFY
-    expect(page).to have_css 'article.product'
-    #selecting product page
-    #first("article.product").find_link("Details").trigger("click")
-    find_link('Details', match: :first).click
-    expect(page).to have_css 'section.products-show'
     save_screenshot
+    expect(page).to have_text 'My Cart (0)'
+    
+    #selecting product page
+    click_link_or_button('Add', match: :first)
+    save_screenshot
+    expect(page).to have_text 'My Cart (1)'
   end
 end
